@@ -15,7 +15,7 @@ router.post('/servico', (request, response, next) => {
     next();
 });
 
-router.post('/insertServico', (request, response, next) => {
+router.post('/insertServico/:id', (request, response, next) => {
     insertServico(request.body).then(data => {
         response.send(200, 'Cliente inserida com sucesso');
     }).catch(err => {
@@ -24,7 +24,7 @@ router.post('/insertServico', (request, response, next) => {
     next();
 });
 
-router.put('/updateServico', (request, response, next) => {
+router.put('/updateServico/:id', (request, response, next) => {
     updateServico(request.body).then(data => {
         response.send(200, 'Cliente atualizada com sucesso');
     }).catch(err => {
@@ -33,7 +33,7 @@ router.put('/updateServico', (request, response, next) => {
     next();
 });
 
-router.del('/deleteServico', (request, response, next) => {
+router.del('/deleteServico/:id', (request, response, next) => {
     deleteServico(request.body).then(data => {        
         response.send(200, retornos(true, 'Cliente excluída com sucesso',data));
     }).catch(err => {

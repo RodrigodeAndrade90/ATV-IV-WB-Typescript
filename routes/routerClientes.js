@@ -1,4 +1,6 @@
+import { server as router } from '../config/server';
 import { buscarCliente, insertCliente, updateCliente, deleteCliente } from '../Controllers/clienteController';
+import validarToken from '../config/token';
 
 router.post('/cliente', (request, response, next) => {    
     if (validarToken(request.header('token'))){        
@@ -13,7 +15,7 @@ router.post('/cliente', (request, response, next) => {
     next();
 });
 
-router.post('/insertCliente', (request, response, next) => {
+router.post('/insertCliente/:id', (request, response, next) => {
     insertCliente(request.body).then(data => {
         response.send(200, 'Cliente inserida com sucesso');
     }).catch(err => {
@@ -22,7 +24,7 @@ router.post('/insertCliente', (request, response, next) => {
     next();
 });
 
-router.put('/updateCliente', (request, response, next) => {
+router.put('/updateCliente/:id', (request, response, next) => {
     updateCliente(request.body).then(data => {
         response.send(200, 'Cliente atualizada com sucesso');
     }).catch(err => {
@@ -31,7 +33,7 @@ router.put('/updateCliente', (request, response, next) => {
     next();
 });
 
-router.del('/deleteCliente', (request, response, next) => {
+router.del('/deleteCliente/:id', (request, response, next) => {
     deleteCliente(request.body).then(data => {        
         response.send(200, retornos(true, 'Cliente excluída com sucesso',data));
     }).catch(err => {

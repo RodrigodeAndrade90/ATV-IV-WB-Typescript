@@ -15,7 +15,7 @@ router.post('/produto', (request, response, next) => {
     next();
 });
 
-router.post('/insertProduto', (request, response, next) => {
+router.post('/insertProduto/:id', (request, response, next) => {
     insertProduto(request.body).then(data => {
         response.send(200, 'Cliente inserida com sucesso');
     }).catch(err => {
@@ -24,7 +24,7 @@ router.post('/insertProduto', (request, response, next) => {
     next();
 });
 
-router.put('/updateProduto', (request, response, next) => {
+router.put('/updateProduto/:id', (request, response, next) => {
     updateProduto(request.body).then(data => {
         response.send(200, 'Cliente atualizada com sucesso');
     }).catch(err => {
@@ -33,7 +33,7 @@ router.put('/updateProduto', (request, response, next) => {
     next();
 });
 
-router.del('/deleteProduto', (request, response, next) => {
+router.del('/deleteProduto/:id', (request, response, next) => {
     deleteProduto(request.body).then(data => {        
         response.send(200, retornos(true, 'Cliente excluída com sucesso',data));
     }).catch(err => {
