@@ -25,6 +25,8 @@ app.use(cors());
 app.use(express.json())
 
 app.use('/cliente', routerClientes)
+app.use('/produto', routerProdutos)
+app.use('/servico', routerServicos)
 
 
 

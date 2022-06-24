@@ -1,8 +1,10 @@
-import { buscarCliente, insertCliente, updateCliente, deleteCliente } from '../Controllers/clienteController';
+import { server as router } from '../config/server';
+import { buscarProduto, insertProduto, updateProduto, deleteProduto } from '../Controllers/ProdutoController';
+import validarToken from '../config/token';
 
-router.post('/cliente', (request, response, next) => {    
+router.post('/produto', (request, response, next) => {    
     if (validarToken(request.header('token'))){        
-        buscarCliente(request.body.skip, request.body.limit).then(data => {
+        buscarProduto(request.body.skip, request.body.limit).then(data => {
             response.send(200, retornos(true, 'busca realizada',data));
         }).catch(err => {
             response.send(503, retornos(true, 'falha ao buscar',err));
@@ -13,8 +15,8 @@ router.post('/cliente', (request, response, next) => {
     next();
 });
 
-router.post('/insertCliente', (request, response, next) => {
-    insertCliente(request.body).then(data => {
+router.post('/insertProduto', (request, response, next) => {
+    insertProduto(request.body).then(data => {
         response.send(200, 'Cliente inserida com sucesso');
     }).catch(err => {
         response.send(400, err);
@@ -22,8 +24,8 @@ router.post('/insertCliente', (request, response, next) => {
     next();
 });
 
-router.put('/updateCliente', (request, response, next) => {
-    updateCliente(request.body).then(data => {
+router.put('/updateProduto', (request, response, next) => {
+    updateProduto(request.body).then(data => {
         response.send(200, 'Cliente atualizada com sucesso');
     }).catch(err => {
         response.send(400, err);
@@ -31,8 +33,8 @@ router.put('/updateCliente', (request, response, next) => {
     next();
 });
 
-router.del('/deleteCliente', (request, response, next) => {
-    deleteCliente(request.body).then(data => {        
+router.del('/deleteProduto', (request, response, next) => {
+    deleteProduto(request.body).then(data => {        
         response.send(200, retornos(true, 'Cliente excluída com sucesso',data));
     }).catch(err => {
         response.send(400, retornos(false, 'falha ao excluída com sucesso',err));
